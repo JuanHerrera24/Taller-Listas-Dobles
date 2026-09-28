@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Inventory Pro</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                📦
+            </div>
+
+            <div>
+                <h2>Inventory<span>Pro</span></h2>
+                <small>Management System</small>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <div class="nav-label">
+                MAIN MENU
+            </div>
+
+            <a href="#" class="nav-link active">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="#inventory" class="nav-link">
+                <span>📦</span>
+                Inventory
+            </a>
+
+            <a href="#add-product" class="nav-link">
+                <span>＋</span>
+                New Product
+            </a>
+
+
+            <div class="nav-label structure-label">
+                DATA STRUCTURE
+            </div>
+
+            <a href="#structure" class="nav-link">
+                <span>⇄</span>
+                Doubly Linked List
+            </a>
+
+            <a href="#operations" class="nav-link">
+                <span>⚙</span>
+                Operations
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="online">
+
+                <span class="online-dot"></span>
+
+                <div>
+                    <strong>System Online</strong>
+                    <small>Python + Flask</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="header">
+
+            <div>
+
+                <div class="breadcrumb">
+                    Dashboard <span>/</span> Inventory
+                </div>
+
+                <h1>Inventory Management</h1>
+
+                <p>
+                    Manage your products using a doubly linked list.
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <div class="status">
+
+                    <span></span>
+
+                    System operational
+
+                </div>
+
+                <div class="user">
+                    AD
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <div class="stat-icon purple">
+                    📦
+                </div>
+
+                <div>
+
+                    <label>Total Products</label>
+
+                    <strong id="totalProducts">
+                        0
+                    </strong>
+
+                    <small>Registered products</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon blue">
+                    ◈
+                </div>
+
+                <div>
+
+                    <label>Active Nodes</label>
+
+                    <strong id="activeNodes">
+                        0
+                    </strong>
+
+                    <small>List nodes</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <label>System Status</label>
+
+                    <strong class="success-text">
+                        Active
+                    </strong>
+
+                    <small>All services running</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon orange">
+                    ⇄
+                </div>
+
+                <div>
+
+                    <label>Current Direction</label>
+
+                    <strong id="currentDirection">
+                        Forward
+                    </strong>
+
+                    <small>List traversal</small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="card" id="add-product">
+
+            <div class="card-title">
+
+                <div class="title-icon purple">
+                    ＋
+                </div>
+
+                <div>
+
+                    <h2>Add Product</h2>
+
+                    <p>
+                        Add a new node to the doubly linked list.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="productForm">
+
+                <div class="fields">
+
+                    <div class="field">
+
+                        <label>CODE</label>
+
+                        <div class="input">
+
+                            <span>⌁</span>
+
+                            <input
+                                id="code"
+                                type="text"
+                                placeholder="P004"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>PRODUCT NAME</label>
+
+                        <div class="input">
+
+                            <span>□</span>
+
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Product name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>CATEGORY</label>
+
+                        <div class="input">
+
+                            <span>◈</span>
+
+                            <input
+                                id="category"
+                                type="text"
+                                placeholder="Category"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>QUANTITY</label>
+
+                        <div class="input">
+
+                            <span>#</span>
+
+                            <input
+                                id="quantity"
+                                type="number"
+                                min="0"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>PRICE</label>
+
+                        <div class="input">
+
+                            <span>$</span>
+
+                            <input
+                                id="price"
+                                type="number"
+                                min="0"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        ＋ Add Product
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <section class="card" id="inventory">
+
+            <div class="inventory-top">
+
+                <div class="card-title">
+
+                    <div class="title-icon blue">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h2>Inventory</h2>
+
+                        <p>
+                            Products currently stored in the list.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="secondary-button"
+                        onclick="loadProducts()"
+                    >
+                        → Forward
+                    </button>
+
+                    <button
+                        class="secondary-button"
+                        onclick="loadReverse()"
+                    >
+                        ← Reverse
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="search">
+
+                <span>⌕</span>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search by code, product or category..."
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>PRODUCT</th>
+                            <th>CODE</th>
+                            <th>CATEGORY</th>
+                            <th>STOCK</th>
+                            <th>PRICE</th>
+                            <th>STATUS</th>
+                            <th>ACTION</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="productTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <section class="card" id="structure">
+
+            <div class="card-title">
+
+                <div class="title-icon orange">
+                    ⇄
+                </div>
+
+                <div>
+
+                    <h2>Doubly Linked List</h2>
+
+                    <p>
+                        Visual representation of the data structure.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="list-visual">
+
+                <div class="null-node">
+                    NULL
+                </div>
+
+
+                <div class="arrow">
+                    ⇄
+                </div>
+
+
+                <div class="visual-node">
+
+                    <div class="node-top">
+                        <span>NODE 01</span>
+                        <small>NODE</small>
+                    </div>
+
+                    <strong>Product</strong>
+
+                    <div class="node-bottom">
+                        ← Previous
+                        <span>Next →</span>
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    ⇄
+                </div>
+
+
+                <div class="visual-node">
+
+                    <div class="node-top">
+                        <span>NODE 02</span>
+                        <small>NODE</small>
+                    </div>
+
+                    <strong>Product</strong>
+
+                    <div class="node-bottom">
+                        ← Previous
+                        <span>Next →</span>
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    ⇄
+                </div>
+
+
+                <div class="visual-node">
+
+                    <div class="node-top">
+                        <span>NODE 03</span>
+                        <small>NODE</small>
+                    </div>
+
+                    <strong>Product</strong>
+
+                    <div class="node-bottom">
+                        ← Previous
+                        <span>Next →</span>
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    ⇄
+                </div>
+
+
+                <div class="null-node">
+                    NULL
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    💡
+                </div>
+
+                <div>
+
+                    <strong>
+                        How does it work?
+                    </strong>
+
+                    <p>
+                        Each product represents a node. Every node
+                        contains a reference to the previous node
+                        and the next node, allowing the inventory
+                        to be traversed in both directions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="operations" id="operations">
+
+            <div class="operation">
+
+                <div class="operation-icon purple">
+                    ＋
+                </div>
+
+                <h3>Add</h3>
+
+                <p>
+                    Add new products to the end of the list.
+                </p>
+
+                <code>
+                    add()
+                </code>
+
+            </div>
+
+
+            <div class="operation">
+
+                <div class="operation-icon blue">
+                    ⌕
+                </div>
+
+                <h3>Search</h3>
+
+                <p>
+                    Find products using their unique code.
+                </p>
+
+                <code>
+                    search()
+                </code>
+
+            </div>
+
+
+            <div class="operation">
+
+                <div class="operation-icon red">
+                    ×
+                </div>
+
+                <h3>Delete</h3>
+
+                <p>
+                    Remove nodes while preserving the links.
+                </p>
+
+                <code>
+                    delete()
+                </code>
+
+            </div>
+
+
+            <div class="operation">
+
+                <div class="operation-icon green">
+                    ⇄
+                </div>
+
+                <h3>Traverse</h3>
+
+                <p>
+                    Navigate through the list in both directions.
+                </p>
+
+                <code>
+                    get_reverse()
+                </code>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                InventoryPro · Inventory Management System
+            </span>
+
+            <span>
+                Python + Flask
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+
+</html>
